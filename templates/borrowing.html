@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Borrowing</title>
+    </head>
+<body>
+    {% extends "base.html" %}
+    {% block title %} Borrowing {% endblock %}
+    {% block content %}
+    <h1>Borrowing Details</h1>
+    <table border="1">
+        <tr>
+            <th>BorrowId</th>
+            <th>MemeberName</th>
+            <th>MemberType</th>
+            <th>BookTitle</th>
+            <th>AccessLevel</th>
+            <th>BorrowDate</th>
+            <th>DueDate</th>
+            <th>ReturnDate</th>
+            <th>Status</th>
+        </tr>
+        {% for bor in borrow %}
+        <tr>
+            <td>{{bor["BorrowId"]}}</td>
+            <td>{{bor["MemberName"]}}</td>
+            <td>{{bor["MemberType"]}}</td>
+            <td>{{bor["BookTitle"]}}</td>
+            <td>{{bor["AccessLevel"]}}</td>
+            <td>{{bor["BorrowDate"]}}</td>
+            <td>{{bor["DueDate"]}}</td>
+            <td>{{bor["ReturnDate"]}}</td>
+            <td>{{bor["Status"]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endblock %}
+</body>
+</html>

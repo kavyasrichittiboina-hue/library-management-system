@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}
+Add Book
+{% endblock %}
+{% block content %}
+<h2>Add New Book</h2>
+{% if message %}
+<p>{{message}}</p>
+{% endif %}
+<form method="POST" onsubmit="return validate();" nonvalidate>
+    <label>Book Title:</label>
+    <input type="text" name="book_title" required>
+    <br><br>
+    <label>Author:</label>
+    <input type="text" name="author" required>
+    <br><br>
+    <label>Category:</label>
+    <input type="text" name="category" required>
+    <br><br>
+    <label>Quantity:</label>
+    <input type="number" name="quantity" min="1" required>
+    <br><br>
+    <label>Access Level:</label>
+    <select name="access_level" required>
+        <option value="">
+            -- Select Access Level --
+        </option>
+        <option value="Student">
+            Student
+        </option>
+        <option value="Teacher">
+            Teacher Only
+        </option>
+    </select>
+    <br><br>
+    <label>Price:</label>
+    <input type="number" name="price" min="0" step="0.01" required>
+    <br><br>
+    <button type="submit">
+        Add Book
+    </button>
+</form>
+<script>
+
+function validate()
+{
+    let booktitle = document.getElementById("book_title");
+    let author = document.getElementById("author");
+    let category = document.getElementById("category");
+    let quantity = document.getElementById("quantity");
+    let accesslevel = document.getElementById("access_level");
+    let price = document.getElementById("price");
+
+
+    if(booktitle.value.trim() == "")
+    {
+        alert("Please enter Book Title");
+        booktitle.focus();
+        return false;
+    }
+
+
+    if(author.value.trim() == "")
+    {
+        alert("Please enter Author name");
+        author.focus();
+        return false;
+    }
+
+
+    if(category.value.trim() == "")
+    {
+        alert("Please enter Category");
+        category.focus();
+        return false;
+    }
+
+
+    if(quantity.value == "" || quantity.value <= 0)
+    {
+        alert("Please enter a valid Quantity");
+        quantity.focus();
+        return false;
+    }
+
+
+    if(accesslevel.value == "")
+    {
+        alert("Please select Access Level");
+        accesslevel.focus();
+        return false;
+    }
+
+
+    if(price.value == "" || price.value < 0)
+    {
+        alert("Please enter a valid Price");
+        price.focus();
+        return false;
+    }
+
+
+    return true;
+
+}
+</script>
+{% endblock %}

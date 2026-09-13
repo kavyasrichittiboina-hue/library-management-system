@@ -1,0 +1,263 @@
+{%  extends "base.html" %}
+{% block title %}
+Library Reports
+{% endblock %}
+{% block content %}
+<h2>Library Reports</h2>
+<h3>Library Summary</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Total Books</th>
+        <th>Total Copies</th>
+        <th>Available Copies</th>
+        <th>Borrowed Copies</th>
+    </tr>
+    <tr>
+        <td>{{summary.TotalBooks}}</td>
+        <td>{{summary.TotalCopies}}</td>
+        <td>{{summary.AvailableCopies}}</td>
+        <td>{{summary.BorrowedCopies}}</td>
+    </tr>
+</table>
+<br>
+<h3>Borrowed Books</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Borrow ID</th>
+        <th>Member Name</th>
+        <th>Book Title</th>
+        <th>Borrow Date</th>
+        <th>Due Date</th>
+        <th>Status</th>
+    </tr>
+    {% for book in borrowed_books %}
+    <tr>
+        <td>{{ book.BorrowId }}</td>
+        <td>{{ book.MemberName }}</td>
+        <td>{{ book.BookTitle }}</td>
+        <td>{{ book.BorrowDate }}</td>
+        <td>{{ book.DueDate }}</td>
+        <td>{{ book.Status }}</td>
+    </tr>
+    {% endfor %}
+    <h3>Overdue Books</h3>
+    <table border="1" cellpadding="8">
+    <tr>
+        <th>Borrow ID</th>
+        <th>Member Name</th>
+        <th>Book Title</th>
+        <th>Borrow Date</th>
+        <th>Due Date</th>
+        <th>Status</th>
+    </tr>
+    {% for book in overdue_books %}
+    <tr>
+        <td>{{ book["BorrowId"] }}</td>
+        <td>{{ book["MemberName"] }}</td>
+        <td>{{ book["BookTitle"] }}</td>
+        <td>{{ book["BorrowDate"] }}</td>
+        <td>{{ book["DueDate"] }}</td>
+        <td>{{ book["Status"] }}</td>
+    </tr>
+    {% endfor %}
+    <br>
+    <h3>Unpaid Fines</h3>
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Fine ID</th>
+            <th>Member Name</th>
+            <th>Book Title</th>
+            <th>Fine Amount</th>
+            <th>Payment Status</th>
+        </tr>
+        {% for fine in unpaid_fines %}
+        <tr>
+            <td>{{fine["FineId"]}}</td>
+            <td>{{fine["MemberName"]}}</td>
+            <td>{{fine["BookTitle"]}}</td>
+            <td>Rs.{{fine["FineAmount"]}}</td>
+            <td>{{fine["PaidStatus"]}}</td>
+        </tr>
+        {% endfor %}
+        <br>
+<h3>Member Borrowing History</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Member Name</th>
+        <th>Book Title</th>
+        <th>Borrow Date</th>
+        <th>Due Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+    </tr>
+    {% for history in member_history %}
+    <tr>
+        <td>{{ history["MemberName"] }}</td>
+        <td>{{ history["BookTitle"] }}</td>
+        <td>{{ history["BorrowDate"] }}</td>
+        <td>{{ history["DueDate"] }}</td>
+        <td>{{ history["ReturnDate"] or "Not Returned" }}</td>
+        <td>{{ history["Status"] }}</td>
+    </tr>
+    {% endfor %}
+    <br>
+<h3>Book Borrowing Report</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Book ID</th>
+        <th>Book Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Borrow Count</th>
+    </tr>
+    {% for book in book_borrowing %}
+    <tr>
+        <td>{{ book["BookId"] }}</td>
+        <td>{{ book["BookTitle"] }}</td>
+        <td>{{ book["Author"] }}</td>
+        <td>{{ book["Category"] }}</td>
+        <td>{{ book["BorrowCount"] }}</td>
+    </tr>
+    {% endfor %}
+    <br>
+<h3>Category-wise Book Report</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Category</th>
+        <th>Number of Books</th>
+        <th>Total Copies</th>
+        <th>Available Copies</th>
+    </tr>
+    {% for category in category_report %}
+    <tr>
+        <td>{{ category["Category"] }}</td>
+        <td>{{ category["BookCount"] }}</td>
+        <td>{{ category["TotalCopies"] }}</td>
+        <td>{{ category["AvailableCopies"] }}</td>
+    </tr>
+    {% endfor %}
+    <br>
+
+<h3>Audit Log Report</h3>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Audit ID</th>
+        <th>Action</th>
+        <th>Table Name</th>
+        <th>Record</th>
+        <th>Description</th>
+        <th>Action Date</th>
+    </tr>
+
+    {% for log in audit_logs %}
+    <tr>
+        <td>{{ log["AuditId"] }}</td>
+        <td>{{ log["Action"] }}</td>
+        <td>{{ log["TableName"] }}</td>
+        <td>{{ log["Record"] }}</td>
+        <td>{{ log["Description"] }}</td>
+        <td>{{ log["ActionDate"] }}</td>
+    </tr>
+    {% endfor %}
+<h3>Most Borrowed Books</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Rank</th>
+        <th>Book ID</th>
+        <th>Book Title</th>
+        <th>Author</th>
+        <th>Borrow Count</th>
+    </tr>
+    {% for book in top_books %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{book["BookId"]}}</td>
+        <td>{{book["BookTitle"]}}</td>
+        <td>{{book["Author"]}}</td>
+        <td>{{book["BorrowCount"]}}</td>
+    </tr>
+    {% endfor %}
+    <br>
+<h3>Most Active Members</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Rank</th>
+        <th>Member ID</th>
+        <th>Member Name</th>
+        <th>Member Type</th>
+        <th>Borrow Count</th>
+    </tr>
+    {% for member in active_members %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ member["MemberId"] }}</td>
+        <td>{{ member["MemberName"] }}</td>
+        <td>{{ member["MemberType"] }}</td>
+        <td>{{ member["BorrowCount"] }}</td>
+    </tr>
+    {% endfor %}
+    <br>
+<h3>Fine Collection Report</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Total Fines</th>
+        <th>Total Fine Amount</th>
+        <th>Paid Fine Amount</th>
+        <th>Due Fine Amount</th>
+    </tr>
+    <tr>
+        <td>{{ fine_report["TotalFines"] }}</td>
+        <td>Rs. {{ fine_report["TotalFineAmount"] or 0 }}</td>
+        <td>Rs. {{ fine_report["PaidFineAmount"] or 0 }}</td>
+        <td>Rs. {{ fine_report["DueFineAmount"] or 0 }}</td>
+    </tr>
+    <br>
+<h3>Available vs Borrowed Copies</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Total Copies</th>
+        <th>Available Copies</th>
+        <th>Borrowed Copies</th>
+    </tr>
+    <tr>
+        <td>{{ copies_report["TotalCopies"] }}</td>
+        <td>{{ copies_report["AvailableCopies"] }}</td>
+        <td>{{ copies_report["BorrowedCopies"] }}</td>
+    </tr>
+    <br>
+<h3>Acquisition Report</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Acquisition ID</th>
+        <th>Book Title</th>
+        <th>Quantity</th>
+        <th>Acquisition Date</th>
+        <th>Supplier</th>
+        <th>Cost</th>
+    </tr>
+    {% for acquisition in acquisition_report %}
+    <tr>
+        <td>{{ acquisition["AcquisitionId"] }}</td>
+        <td>{{ acquisition["BookTitle"] }}</td>
+        <td>{{ acquisition["Quantity"] }}</td>
+        <td>{{ acquisition["AcquisitionDate"] }}</td>
+        <td>{{ acquisition["Supplier"] }}</td>
+        <td>Rs. {{ acquisition["Cost"] }}</td>
+    </tr>
+    {% endfor %}
+    <br>
+<h3>Teacher vs Student Borrowing Report</h3>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Member Type</th>
+        <th>Borrow Count</th>
+    </tr>
+    {% for member in member_type_report %}
+    <tr>
+        <td>{{ member["MemberType"] }}</td>
+        <td>{{ member["BorrowCount"] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

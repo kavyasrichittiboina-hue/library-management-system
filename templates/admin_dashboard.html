@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}
+Admin Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h2>Admin Dashboard</h2>
+
+<h3>Welcome, {{ login_id }}</h3>
+
+<p>
+    Role: Admin
+</p>
+
+<br>
+
+<div class="dashboard">
+
+    <div class="card">
+        <h3>👥 Members</h3>
+        <p>
+            <a href="/members">Manage Members</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📚 Books</h3>
+        <p>
+            <a href="/books">Manage Books</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>➕ Add Book</h3>
+        <p>
+            <a href="/add_book">Add Book</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📦 Add Copies</h3>
+        <p>
+            <a href="/add_copies">Add Copies</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💰 Update Price</h3>
+        <p>
+            <a href="/update_price">Update Price</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📖 Borrowing</h3>
+        <p>
+            <a href="/borrowing">Manage Borrowing</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💵 Fines</h3>
+        <p>
+            <a href="/fines">Manage Fines</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📦 Acquisitions</h3>
+        <p>
+            <a href="/acquisitions">Acquisitions</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📊 Reports</h3>
+        <p>
+            <a href="/reports">View Reports</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📝 Audit Log</h3>
+        <p>
+            <a href="/auditlogs">Audit Log</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💲 Price History</h3>
+        <p>
+            <a href="/bookpricehistory">Price History</a>
+        </p>
+    </div>
+
+</div>
+
+{% endblock %}

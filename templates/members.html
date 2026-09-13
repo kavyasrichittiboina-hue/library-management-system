@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+Members
+{% endblock %}
+
+{% block content %}
+
+<h2>Library Members</h2>
+
+<table border="1">
+
+<tr>
+    <th>MemberId</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Member Type</th>
+    <th>JoinDate</th>
+    <th>Status</th>
+    <th>Login ID</th>
+</tr>
+
+{% for m in member %}
+
+<tr>
+    <td>{{ m['MemberId'] }}</td>
+    <td>{{ m['MemberName'] }}</td>
+    <td>{{ m['Email'] }}</td>
+    <td>{{ m['Phone'] }}</td>
+    <td>{{ m['MemberType'] }}</td>
+    <td>{{ m['JoinDate'] }}</td>
+    <td>{{ m['Status'] }}</td>
+    <td>{{ m['LoginId'] }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

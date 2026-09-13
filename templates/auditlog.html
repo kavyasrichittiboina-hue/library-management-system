@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Audit Logs</title>
+    </head>
+    <body>
+        {% extends "base.html" %}
+        {% block title %}Audit Logs{% endblock %}
+        {% block content %}
+        <h1>Audit Logs</h1>
+        <table border="1">
+            <tr>
+                <th>LogId</th>
+                <th>Action</th>
+                <th>TableName</th>
+                <th>Record</th>
+                <th>Description</th>
+                <th>ActionDate</th>
+            </tr>
+            {% for audit in audits %}
+            <tr>
+                <td>{{audit["LogId"]}}</td>
+                <td>{{audit["Action"]}}</td>
+                <td>{{audit["TableName"]}}</td>
+                <td>{{audit["Record"]}}</td>
+                <td>{{audit["Description"]}}</td>
+                <td>{{audit["ActionDate"]}}</td>
+            {% endfor %}
+            </tr>
+        </table>
+        {% endblock %}
+    </body>
+</html>

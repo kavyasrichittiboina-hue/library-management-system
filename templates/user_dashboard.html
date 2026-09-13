@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+User Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h2>User Dashboard</h2>
+
+<h3>Welcome, {{ login_id }}</h3>
+
+<p>
+    Role: {{ role }}
+</p>
+
+<br>
+
+<div class="dashboard">
+
+    <div class="card">
+        <h3>📚 Books</h3>
+        <p>
+            <a href="/books">View Books</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📖 My Borrowing</h3>
+        <p>
+            <a href="/borrowing">My Books</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>💰 My Fines</h3>
+        <p>
+            <a href="/fines">View Fines</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>📋 History</h3>
+        <p>
+            <a href="/borrowing">Borrowing History</a>
+        </p>
+    </div>
+
+</div>
+
+{% endblock %}

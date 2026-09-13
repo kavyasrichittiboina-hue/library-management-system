@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+
+<h2>Library Login</h2>
+
+{% if message %}
+<p class="error">{{ message }}</p>
+{% endif %}
+
+<form method="POST" onsubmit="return validateLogin();" novalidate>
+
+    <label>Login ID:</label>
+    <input type="text" id="login_id" name="login_id">
+
+    <br><br>
+
+    <label>Password:</label>
+    <input type="password" id="password" name="password">
+
+    <br><br>
+
+    <button type="submit">Login</button>
+
+</form>
+
+<script>
+
+function validateLogin()
+{
+    let loginId = document.getElementById("login_id");
+    let password = document.getElementById("password");
+
+    if(loginId.value.trim() == "")
+    {
+        alert("Please enter Login ID");
+        loginId.focus();
+        return false;
+    }
+    if(password.value.length < 6)
+    {
+        alert("Password must contain at least 6 characters");
+        password.focus();
+        return false;
+    }
+
+    if(password.value.trim() == "")
+    {
+        alert("Please enter Password");
+        password.focus();
+        return false;
+    }
+
+    return true;
+}
+
+</script>
+
+{% endblock %}

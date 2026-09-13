@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <tile>Acquisitions</title>
+    </head>
+    <body>
+        {% extends "base.html" %}
+        {% block title %} Acquisitions {% endblock %}
+        {% block content %}
+        <h1>Acquisitions</h1>
+        <table border="1">
+            <tr>
+                <th>AcquisitionsId</th>
+                <th>BookId</th>
+                <th>Quantity</th>
+                <th>PurchaseDate</th>
+                <th>Supplier</th>
+                <th>PurchasePrice</th>
+            </tr>
+            {% for acqss in acqs %}
+            <tr>
+                <td>{{acqss["AcquisitionId"]}}</td>
+                <td>{{acqss["BookId"]}}</td>
+                <td>{{acqss["Quantity"]}}</td>
+                <td>{{acqss["PurchaseDate"]}}</td>
+                <td>{{acqss["Supplier"]}}</td>
+                <td>{{acqss["Purchaseprice"]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endblock %}
+    </body>
+</html>
+
+

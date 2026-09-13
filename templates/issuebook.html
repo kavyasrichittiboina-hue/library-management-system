@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}
+Issue Books
+{% endblock %}
+
+{% block content %}
+
+<h2>Issue Books</h2>
+
+<form method="POST">
+
+    <!-- Select Member -->
+    <label>Select Member:</label>
+
+    <select name="member_id" required>
+
+        <option value="">-- Select Member --</option>
+
+        {% for member in members %}
+
+        <option value="{{ member['MemberId'] }}">
+            {{ member['MemberName'] }} - {{ member['MemberId'] }} - {{member['MemberType']}}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+
+    <!-- Select Book -->
+    <label>Select Book:</label>
+
+    <select name="book_id" required>
+
+        <option value="">-- Select Book --</option>
+
+        {% for book in books %}
+
+        <option value="{{ book['BookId'] }}">
+            {{ book['BookTitle'] }}
+            -
+            {{ book['AccessLevel'] }}
+            -
+            Available: {{ book['AvailableCopies'] }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+
+    <!-- Due Date -->
+    <label>Due Date:</label>
+
+    <input type="date" name="due_date" required>
+
+    <br><br>
+
+
+    <!-- Submit -->
+    <button type="submit">
+        Issue Book
+    </button>
+
+</form>
+
+{% endblock %}

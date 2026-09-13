@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BookPriceHistory</title>
+    </head>
+    <body>
+        {% extends "base.html" %}
+        {% block title%}Book Price History{% endblock %}
+        {% block content %}
+        <h1>Book Price History</h1>
+        <table border="1">
+            <tr>
+                <th>HistoryId</th>
+                <th>BookId</th>
+                <th>Oldprice</th>
+                <th>Newprice</th>
+                <th>Updatedate</th>
+            </tr>
+            {% for booksph in bookph %}
+            <tr>
+                <td>{{booksph["HistoryId"]}}</td>
+                <td>{{booksph["BookId"]}}</td>
+                <td>{{booksph["Oldprice"]}}</td>
+                <td>{{booksph["Newprice"]}}</td>
+                <td>{{booksph["Updatedate"]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endblock %}
+    </body>
+</html>
+    

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+Books
+{% endblock %}
+
+{% block content %}
+
+<h1>Books</h1>
+
+<table border="1">
+
+    <tr>
+        <th>BookId</th>
+        <th>BookTitle</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>AccessLevel</th>
+        <th>AvailableCopies</th>
+        <th>Price</th>
+    </tr>
+
+    {% for books in book %}
+
+    <tr>
+        <td>{{ books["BookId"] }}</td>
+        <td>{{ books["BookTitle"] }}</td>
+        <td>{{ books["Author"] }}</td>
+        <td>{{ books["Category"] }}</td>
+        <td>{{ books["Quantity"] }}</td>
+        <td>{{ books["AccessLevel"] }}</td>
+        <td>{{ books["AvailableCopies"] }}</td>
+        <td>₹{{ books["Price"] }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

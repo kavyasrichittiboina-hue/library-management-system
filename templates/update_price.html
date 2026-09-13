@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}
+Update Book Price
+{% endblock %}
+{% block content %}
+<h2>Update Book Price</h2>
+{% if message %}
+<p>{{message}}</p>
+{% endif %}
+<form method="POST">
+    <label>Select Book:</label>
+    <select name="book_id" required>
+        <option value="">
+            --Select Book --
+        </option>
+        {% for book in books %}
+        <option value="{{book.BookId}}">
+            {{book.BookTitle}} - {{book.Price}}
+        </option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <label>New Price:</label>
+    <input type="number" name="new_price" min="0" step="0.01" required>
+    <br><br>
+    <button type="submit">Update Price</button>
+</form>
+<script>
+
+function validatePrice()
+{
+    let book = document.getElementById("book_id");
+    let price = document.getElementById("new_price");
+    if(book.value == "")
+    {
+        alert("Please select a book");
+        book.focus();
+        return false;
+    }
+    if(price.value == "")
+    {
+        alert("Please enter New Price");
+        price.focus();
+        return false;
+    }
+    if(price.value < 0)
+    {
+        alert("Price cannot be negative");
+        price.focus();
+        return false;
+    }
+    return true;
+}
+</script>
+{% endblock %}  

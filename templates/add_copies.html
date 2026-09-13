@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}
+Add Copies
+{% endblock %}
+{% block content %}
+<h2> Add New Copies</h2>
+{% if message %}
+<p>{{message}}</p>
+{% endif %}
+<form method="POST">
+    <label>Select Book:</label>
+    <select name="book_id" required>
+        <option value="">--Select Book--</option>
+        {% for book in books %}
+        <option value="{{book['BookId']}}">
+            {{book['BookTitle']}}
+            -
+            Current Quantity:
+            {{book['Quantity']}}
+            -
+            Available:
+            {{book['AvailableCopies']}}
+        </option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <label>Number of New Copies:</label>
+    <input type="number" name="quantity" min="1" required>
+    <br><br>
+    <label>Supplier:</label>
+    <input type="text" name="supplier" required>
+    <br><br>
+    <label>Purchase Price:</label>
+    <input type="number" name="purchase_price" min=0 step="0.01" required>
+    <br><br>
+    <button type="submit">Add Copies</button>
+</form>
+<script>
+
+function validateCopies()
+{
+
+    let book = document.getElementById("book_id");
+    let quantity = document.getElementById("quantity");
+    let supplier = document.getElementById("supplier");
+    let purchasePrice = document.getElementById("purchase_price");
+    if(book.value == "")
+    {
+        alert("Please select a book");
+        book.focus();
+        return false;
+    }
+    if(quantity.value == "" || quantity.value <= 0)
+    {
+        alert("Please enter a valid number of copies");
+        quantity.focus();
+        return false;
+    }
+    if(supplier.value.trim() == "")
+    {
+        alert("Please enter Supplier name");
+        supplier.focus();
+        return false;
+    }
+    if(purchasePrice.value == "" || purchasePrice.value < 0)
+    {
+        alert("Please enter a valid Purchase Price");
+        purchasePrice.focus();
+        return false;
+    }
+    return true;
+}
+</script>
+{% endblock %}

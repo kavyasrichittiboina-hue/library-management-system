@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}
+Pay Fine
+{% endblock %}
+{% block content %}
+<h2> Pay Fines</h2>
+{% if message %}
+<p>
+    {{message}}
+</p>
+{% endif %}
+<table border="1">
+    <tr>
+        <th>Fine ID</th>
+        <th>Member</th>
+        <th>Book</th>
+        <th>Fine Amount</th>
+        <th>Payment Status</th>
+        <th>Action</th>
+    </tr>
+    {% for fine in fines %}
+    <tr>
+        <td>{{fine["FineID"]}}</td>
+        <td>{{fine["MemberName"]}}</td>
+        <td>{{fine['BookTitle']}}</td>
+        <td>Rs.{{"%.2f"|format(fine['FineAmount'])}}</td>
+        <td>{{fine['PaymentStatus']}}</td>
+        <td>
+            <form action="/pay_fine" method="POST">
+                <input type="hidden" name="fine_id" value="{{ fine['FineID'] }}">
+                <button type="submit">Pay Fine</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

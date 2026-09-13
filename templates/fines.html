@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fines</title>
+    </head>
+    <body>
+        {% extends "base.html"%}
+        {% block title %}Fines{% endblock %}
+        {% block content %}
+        <h1>Fines</h1>
+        <table border="1">
+            <tr>
+                <th>FineId</th>
+                <th>BorrowId</th>
+                <th>FineAmount</th>
+                <th>PaymentStatus</th>
+            </tr>
+            {% for fines in fine %}
+            <tr>
+                <td>{{fines["FineID"]}}</td>
+                <td>{{fines["BorrowId"]}}</td>
+                <td>{{fines["Fineamount"]}}</td>
+                <td>{{fines["Paymentstatus"]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endblock %}
+    </body>
+    </html>

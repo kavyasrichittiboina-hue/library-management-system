@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}
+Add Member
+{% endblock %}
+{% block content %}
+<h2>Register New Member</h2>
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+<form method="POST">
+    <label>Member Name:</label>
+    <input type="text" name="member_name" required>
+    <br><br>
+    <label>Email:</label>
+    <input type="email" name="email" required>
+    <br><br>
+    <label>Phone:</label>
+    <input type="text" name="phone" required>
+    <br><br>
+    <label>Member Type:</label>
+    <select name="member_type" required>
+        <option value="">-- Select Member Type --</option>
+        <option value="Student">Student</option>
+        <option value="Teacher">Teacher</option>
+    </select>
+    <br><br>
+    <button type="submit">Register Member</button>
+</form>
+<script>
+function validateMember()
+{
+    let memberName = document.getElementById("member_name");
+    let email = document.getElementById("email");
+    let phone = document.getElementById("phone");
+    let memberType = document.getElementById("member_type");
+    if(memberName.value.trim() == "")
+    {
+        alert("Please enter Member Name");
+        memberName.focus();
+        return false;
+    }
+    if(email.value.trim() == "")
+    {
+        alert("Please enter Email");
+        email.focus();
+        return false;
+    }
+    let emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailPattern.test(email.value))
+    {
+        alert("Please enter a valid Email");
+        email.focus();
+        return false;
+    }
+    if(phone.value.trim() == "")
+    {
+        alert("Please enter Phone Number");
+        phone.focus();
+        return false;
+    }
+    let phonePattern = /^[0-9]{10}$/;
+    if(!phonePattern.test(phone.value))
+    {
+        alert("Phone Number must contain 10 digits");
+        phone.focus();
+        return false;
+    }
+    if(memberType.value == "")
+    {
+        alert("Please select Member Type");
+        memberType.focus();
+        return false;
+    }
+    return true;
+}
+</script>
+{% endblock %}
