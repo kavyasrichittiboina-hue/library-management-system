@@ -620,7 +620,64 @@ for book in books:
         VALUES (?, ?, ?, ?, ?, ?, ?)
     """, book)
 
+# ==========================================
+# SAMPLE BORROWING DATA
+# ==========================================
 
+cursor.execute("""
+SELECT MemberId
+FROM Members
+WHERE LoginId = ?
+""", ("5241411166",))
+
+student = cursor.fetchone()
+
+cursor.execute("""
+SELECT BookId
+FROM Books
+WHERE BookTitle = ?
+""", ("Python Programming",))
+
+python_book = cursor.fetchone()
+
+if student and python_book:
+
+    cursor.execute("""
+    SELECT BorrowId
+    FROM Borrowing
+    WHERE MemberId = ? AND BookId = ?
+    """, (student[0], python_book[0]))
+
+    existing_borrow = cursor.fetchone()
+
+    if not existing_borrow:
+
+        cursor.execute("""
+        INSERT INTO Borrowing
+        (MemberId, BookId, BorrowDate, DueDate, Status)
+        VALUES (?, ?, '2026-09-01', '2026-09-05', 'Returned')
+        """, (student[0], python_book[0]))
+
+        borrow_id = cursor.lastrowid
+
+        cursor.execute("""
+        UPDATE Books
+        SET AvailableCopies = AvailableCopies + 1
+        WHERE BookId = ?
+        """, (python_book[0],))
+
+        cursor.execute("""
+        UPDATE Borrowing
+        SET ReturnDate = '2026-09-10'
+        WHERE BorrowId = ?
+        """, (borrow_id,))
+
+        # Add a sample fine
+        cursor.execute("""
+        INSERT INTO Fines
+        (BorrowId, Fineamount, Paymentstatus)
+        VALUES (?, 50, 'Due')
+        """, (borrow_id,))
 # ==========================================
 # COMMIT CHANGES
 # ==========================================
