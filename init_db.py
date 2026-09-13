@@ -678,6 +678,36 @@ if student and python_book:
         (BorrowId, Fineamount, Paymentstatus)
         VALUES (?, 50, 'Due')
         """, (borrow_id,))
+
+# ==========================================
+# SAMPLE ACQUISITION DATA
+# ==========================================
+
+cursor.execute("""
+SELECT BookId
+FROM Books
+WHERE BookTitle = ?
+""", ("Python Programming",))
+
+python_book = cursor.fetchone()
+
+if python_book:
+
+    cursor.execute("""
+    SELECT AcquisitionID
+    FROM Acquisitions
+    WHERE BookId = ?
+    """, (python_book[0],))
+
+    existing_acquisition = cursor.fetchone()
+
+    if not existing_acquisition:
+
+        cursor.execute("""
+        INSERT INTO Acquisitions
+        (BookId, Quantity, PurchaseDate, Supplier)
+        VALUES (?, 5, '2026-09-01', 'ABC Books Supplier')
+        """, (python_book[0],))
 # ==========================================
 # COMMIT CHANGES
 # ==========================================
