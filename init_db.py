@@ -704,10 +704,10 @@ if python_book:
     if not existing_acquisition:
 
         cursor.execute("""
-        INSERT INTO Acquisitions
-        (BookId, Quantity, PurchaseDate, Supplier)
-        VALUES (?, 5, '2026-09-01', 'ABC Books Supplier')
-        """, (python_book[0],))
+INSERT INTO Acquisitions
+(BookId, Quantity, PurchaseDate, Supplier, Purchaseprice)
+VALUES (?, 5, '2026-09-01', 'ABC Books Supplier', 2500)
+""", (python_book[0],))
 # ==========================================
 # COMMIT CHANGES
 # ==========================================
