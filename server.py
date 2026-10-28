@@ -19,10 +19,10 @@ from google.genai import types
 
 from app import app as flask_app
 
-
+app=FastAPI()
 logger = logging.getLogger(__name__)
 DATABASE_PATH = Path(__file__).resolve().parent / "library.db"
-DEFAULT_MODEL = "gemini-4-argon"
+DEFAULT_MODEL = "gemini-3.5-flash"
 GEMINI_TIMEOUT_MS = 20_000
 SDK_RETRY_ATTEMPTS = 0
 MAX_PROVIDER_ATTEMPTS = 2
@@ -185,6 +185,7 @@ async def chat_about_books(payload: ChatRequest) -> ChatResponse:
                 detail="Gemini timed out after a limited retry. Please try again shortly.",
             ) from error
 
+        logger.exception("Gemini request failed")
         provider_status = get_provider_status_code(error)
         if provider_status is not None:
             logger.warning("Gemini API returned HTTP %d.", provider_status)

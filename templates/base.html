@@ -11,7 +11,8 @@
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="icon" type="image/svg+xml"
+          href="{{ url_for('static', filename='favicon.svg') }}">
 </head>
 
 <body>
@@ -84,6 +85,51 @@
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<!-- Library AI Chatbot -->
+<div id="library-chat-widget">
+    <button
+        id="library-chat-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="library-chat-panel">
+        Ask Library AI
+    </button>
+
+    <section id="library-chat-panel" hidden aria-label="Library AI chatbot">
+        <div class="library-chat-header">
+            <strong>Library AI Assistant</strong>
+            <span>Ask about books and availability</span>
+        </div>
+
+        <div id="library-chat-messages" role="log" aria-live="polite">
+            <div class="library-chat-message assistant">
+                Hello! Ask me about books in the library.
+            </div>
+        </div>
+
+        <form id="library-chat-form">
+            <label class="visually-hidden" for="library-chat-input">
+                Your question
+            </label>
+            <input
+                id="library-chat-input"
+                type="text"
+                placeholder="Ask about books..."
+                maxlength="500"
+                autocomplete="off"
+                required>
+            <button id="library-chat-send" type="submit">Send</button>
+        </form>
+    </section>
+</div>
+
+<script src="{{ url_for('static', filename='chatbot.js') }}" defer></script>
+
+
+
 </body>
+
 
 </html>
